@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:200');
+
+.app-name {
+    font-size: 3.5rem;
+    text-decoration: none;
+    font-family: Raleway;
+    font-weight: 700;
+    color: white;
+}
+
+.nav-link {
+    text-decoration: none;
+}
+
+.navbar {
+    background: #5e6073;
+    height: 80px;
+}
+
+.user-button {
+    display: block;
+    position: relative;
+    width: 310px;
+    height: 65px;
+    font-size: 20px;
+    font-size: 2.2rem;
+    font-family: Raleway;
+    font-weight: 700;
+    background: #7b88ff;
+    color: white;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    box-shadow: 0 6px #6c5ce7;
+}
+
+.user-button:hover {
+    box-shadow: 0 4px #6c5ce7;
+}
+
+.user-button:active {
+    box-shadow: none;
+    top: 6px;
+}
+
+.login-input {
+    margin-top: 0;
+    width: 350px;
+    height: 55px;
+    margin: 0.5vw;
+    font-size: 1.3rem;
+    font-family: Raleway;
+    font-weight: 700;
+    border: 2px solid #5e6073;
+    border-radius: 10px;
+}
+
+.login-header {
+    font-family: Raleway;
+    font-weight: 700;
+    font-size: 3rem;
+    margin-bottom: 23px !important;
+}
+
+.login-form {
+    display: flex;
+    justify-content: space-between;
+}
+
+.login-box {
+    border: 3px solid #5e6073;
+    border-radius: 10px;
+    width: 600px;
+    height: 450px;
+    margin: 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding
+}
+
+.login-message {
+    opacity: 1;
+    font-size: 1.1rem;
+    color: #c72c41;
+    animation-name: fadeaway;
+    animation-duration: 3s;
+    animation-delay: 0s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    transition: all 1s;
+}
+
+@keyframes fadeaway {
+    100% {
+        opacity: 0;
+    }
+}
+
+.loggedin-header {
+    font-family: Raleway;
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+}
+
+
+.loggedin-button {
+    display: block;
+    position: relative;
+    width: 200px;
+    height: 45px;
+    font-size: 30px;
+    font-family: Raleway;
+    font-weight: 700;
+    background: #7b88ff;
+    color: white;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    box-shadow: 0 6px #6c5ce7;
+}
+
+.loggedin-button:hover {
+    box-shadow: 0 4px #6c5ce7;
+}
+
+.loggedin-button:active {
+    box-shadow: none;
+    top: 6px;
+}
+
+img {
+    margin-top: 30px;
+    height: 450px;
+    margin-bottom: 20px;
+}
+
+.dog-content {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+}

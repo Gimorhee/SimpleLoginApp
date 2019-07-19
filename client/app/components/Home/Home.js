@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import RandomImage from './RandomImage';
 import 'whatwg-fetch';
 
 import {
@@ -210,15 +211,36 @@ class Home extends Component {
 
     if (!token) {
       return (
-        <div>
-          <div>
+        <div className="login-form">
+          <div className="login-box"> 
+            <p className="login-header">Sign Up</p>
+            <input
+              className="login-input"
+              type="email"
+              placeholder="Email"
+              value={signUpEmail}
+              onChange={this.onTextboxChangeSignUpEmail}
+            /><br />
+            <input
+              className="login-input"
+              type="password"
+              placeholder="Password"
+              value={signUpPassword}
+              onChange={this.onTextboxChangeSignUpPassword}
+            /><br />
+            <button className="user-button" onClick={this.onSignUp}>Sign Up</button>
             {
-              (signInError) ? (
-                <p>{signInError}</p>
+              (signUpError) ? (
+                <p className="login-message">{signUpError}</p>
               ) : (null)
             }
-            <p>Sign In</p>
+          </div>
+          <br />
+          <br />
+          <div className="login-box">
+            <p className="login-header">Sign In</p>
             <input
+              className="login-input"
               type="email"
               placeholder="Email"
               value={signInEmail}
@@ -226,36 +248,19 @@ class Home extends Component {
             />
             <br />
             <input
+              className="login-input"
               type="password"
               placeholder="Password"
               value={signInPassword}
               onChange={this.onTextboxChangeSignInPassword}
             />
             <br />
-            <button onClick={this.onSignIn}>Sign In</button>
-          </div>
-          <br />
-          <br />
-          <div>
+            <button className="user-button" onClick={this.onSignIn}>Sign In</button>
             {
-              (signUpError) ? (
-                <p>{signUpError}</p>
+              (signInError) ? (
+                <p className="login-message">{signInError}</p>
               ) : (null)
             }
-            <p>Sign Up</p>
-            <input
-              type="email"
-              placeholder="Email"
-              value={signUpEmail}
-              onChange={this.onTextboxChangeSignUpEmail}
-            /><br />
-            <input
-              type="password"
-              placeholder="Password"
-              value={signUpPassword}
-              onChange={this.onTextboxChangeSignUpPassword}
-            /><br />
-            <button onClick={this.onSignUp}>Sign Up</button>
           </div>
 
         </div>
@@ -263,9 +268,10 @@ class Home extends Component {
     }
 
     return (
-      <div>
-        <p>Account</p>
-        <button onClick={this.logout}>Logout</button>
+      <div className="loggedin-content">
+        <p className="loggedin-header">Welcome {this.state.signUpEmail} !</p>
+        <button className="loggedin-button" onClick={this.logout}>Logout</button>
+        <RandomImage />
       </div>
     );
   }
