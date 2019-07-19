@@ -18,7 +18,7 @@ npm install
 
 ## Running
 - Fork & Clone
-- cd into `MERN-boilerplate`
+- cd into repository
 - Run `npm install`
 - Run `npm start` for production mode
 - Run `npm run start:dev` for development (webpack dev server) mode
