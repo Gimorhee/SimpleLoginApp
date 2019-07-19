@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
 
+import {
+  getFromStorage,
+  setInStorage,
+} from '../../utils/storage';
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -20,13 +25,14 @@ class Home extends Component {
     this.onTextboxChangeSignInPassword = this.onTextboxChangeSignInPassword.bind(this);
     this.onTextboxChangeSignUpEmail = this.onTextboxChangeSignUpEmail.bind(this);
     this.onTextboxChangeSignUpPassword = this.onTextboxChangeSignUpPassword.bind(this);
-
-    this.onSignUp = this.onSignUp.bind(this);
+    
     this.onSignIn = this.onSignIn.bind(this);
+    this.onSignUp = this.onSignUp.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
-    const obj = getFromStorage('the_main_app');
+    const obj = getFromStorage('simple_login_app');
     if (obj && obj.token) {
       const { token } = obj;
       // Verify token
@@ -81,9 +87,11 @@ class Home extends Component {
       signUpEmail,
       signUpPassword,
     } = this.state;
+
     this.setState({
       isLoading: true,
     });
+
     // Post request to backend
     fetch('/api/account/signup', {
       method: 'POST',
@@ -119,9 +127,11 @@ class Home extends Component {
       signInEmail,
       signInPassword,
     } = this.state;
+
     this.setState({
       isLoading: true,
     });
+
     // Post request to backend
     fetch('/api/account/signin', {
       method: 'POST',
@@ -136,7 +146,7 @@ class Home extends Component {
       .then(json => {
         console.log('json', json);
         if (json.success) {
-          setInStorage('the_main_app', { token: json.token });
+          setInStorage('simple_login_app', { token: json.token });
           this.setState({
             signInError: json.message,
             isLoading: false,
@@ -153,6 +163,35 @@ class Home extends Component {
       });
   }
 
+  logout() {
+    this.setState({
+      isLoading: true,
+    });
+    const obj = getFromStorage('simple_login_app');
+    if (obj && obj.token) {
+      const { token } = obj;
+      // Verify token
+      fetch('/api/account/logout?token=' + token)
+        .then(res => res.json())
+        .then(json => {
+          if (json.success) {
+            this.setState({
+              token: '',
+              isLoading: false
+            });
+          } else {
+            this.setState({
+              isLoading: false,
+            });
+          }
+        });
+    } else {
+      this.setState({
+        isLoading: false,
+      });
+    }
+  }
+
   render() {
     const {
       isLoading,
@@ -164,42 +203,21 @@ class Home extends Component {
       signUpPassword,
       signUpError,
     } = this.state;
+
     if (isLoading) {
       return (<div><p>Loading...</p></div>);
     }
+
     if (!token) {
       return (
         <div>
-          <div>
-            {
-              (signUpError) ? (
-                <p>{signUpError}</p>
-              ) : (null)
-            }
-            <p>Register</p>
-            <input
-              type="email"
-              placeholder="Email"
-              value={signUpEmail}
-              onChange={this.onTextboxChangeSignUpEmail}
-            /><br />
-            <input
-              type="password"
-              placeholder="Password"
-              value={signUpPassword}
-              onChange={this.onTextboxChangeSignUpPassword}
-            /><br />
-            <button onClick={this.onSignUp}>Register</button>
-          </div>
-          <br />
-          <br />
           <div>
             {
               (signInError) ? (
                 <p>{signInError}</p>
               ) : (null)
             }
-            <p>Login</p>
+            <p>Sign In</p>
             <input
               type="email"
               placeholder="Email"
@@ -214,14 +232,40 @@ class Home extends Component {
               onChange={this.onTextboxChangeSignInPassword}
             />
             <br />
-            <button onClick={this.onSignIn}>Login</button>
+            <button onClick={this.onSignIn}>Sign In</button>
           </div>
-       </div>
+          <br />
+          <br />
+          <div>
+            {
+              (signUpError) ? (
+                <p>{signUpError}</p>
+              ) : (null)
+            }
+            <p>Sign Up</p>
+            <input
+              type="email"
+              placeholder="Email"
+              value={signUpEmail}
+              onChange={this.onTextboxChangeSignUpEmail}
+            /><br />
+            <input
+              type="password"
+              placeholder="Password"
+              value={signUpPassword}
+              onChange={this.onTextboxChangeSignUpPassword}
+            /><br />
+            <button onClick={this.onSignUp}>Sign Up</button>
+          </div>
+
+        </div>
       );
     }
+
     return (
       <div>
-        <p>Signed in</p>
+        <p>Account</p>
+        <button onClick={this.logout}>Logout</button>
       </div>
     );
   }
