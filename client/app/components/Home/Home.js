@@ -22,6 +22,7 @@ class Home extends Component {
     this.onTextboxChangeSignUpPassword = this.onTextboxChangeSignUpPassword.bind(this);
 
     this.onSignUp = this.onSignUp.bind(this);
+    this.onSignIn = this.onSignIn.bind(this);
   }
 
   componentDidMount() {
@@ -92,6 +93,46 @@ class Home extends Component {
       });
   }
 
+  onSignIn() {
+    // Grab state
+    const {
+      signInEmail,
+      signInPassword,
+    } = this.state;
+    this.setState({
+      isLoading: true,
+    });
+    // Post request to backend
+    fetch('/api/account/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: signInEmail,
+        password: signInPassword,
+      }),
+    }).then(res => res.json())
+      .then(json => {
+        console.log('json', json);
+        if (json.success) {
+          setInStorage('the_main_app', { token: json.token });
+          this.setState({
+            signInError: json.message,
+            isLoading: false,
+            signInPassword: '',
+            signInEmail: '',
+            token: json.token,
+          });
+        } else {
+          this.setState({
+            signInError: json.message,
+            isLoading: false,
+          });
+        }
+      });
+  }
+
   render() {
     const {
       isLoading,
@@ -153,7 +194,7 @@ class Home extends Component {
               onChange={this.onTextboxChangeSignInPassword}
             />
             <br />
-            <button>Login</button>
+            <button onClick={this.onSignIn}>Login</button>
           </div>
        </div>
       );
