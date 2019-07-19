@@ -18,7 +18,16 @@ npm install
 
 ## Running
 - Fork & Clone
-- cd into repository
+- cd into `MERN-boilerplate`
 - Run `npm install`
-- Run `npm start` for production mode
-- Run `npm run start:dev` for development (webpack dev server) mode
+- Create `config.js` file inside config folder
+- Inside `config.js copy and paste 
+```
+module.exports = {
+    db: 'mongodb://username:password@url:port/db',
+    db_dev: 'mongodb://localhost:27017/login_demo_db',
+  };
+```
+  
+- Run `npm run start:dev` for development (webpack dev server) mode 
+- Go to `localhost:8080`
