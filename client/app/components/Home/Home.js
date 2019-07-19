@@ -111,11 +111,34 @@ class Home extends Component {
         <div>
           <div>
             {
+              (signUpError) ? (
+                <p>{signUpError}</p>
+              ) : (null)
+            }
+            <p>Register</p>
+            <input
+              type="email"
+              placeholder="Email"
+              value={signUpEmail}
+              onChange={this.onTextboxChangeSignUpEmail}
+            /><br />
+            <input
+              type="password"
+              placeholder="Password"
+              value={signUpPassword}
+              onChange={this.onTextboxChangeSignUpPassword}
+            /><br />
+            <button onClick={this.onSignUp}>Register</button>
+          </div>
+          <br />
+          <br />
+          <div>
+            {
               (signInError) ? (
                 <p>{signInError}</p>
               ) : (null)
             }
-            <p>Sign In</p>
+            <p>Login</p>
             <input
               type="email"
               placeholder="Email"
@@ -130,30 +153,7 @@ class Home extends Component {
               onChange={this.onTextboxChangeSignInPassword}
             />
             <br />
-            <button>Sign In</button>
-          </div>
-          <br />
-          <br />
-          <div>
-            {
-              (signUpError) ? (
-                <p>{signUpError}</p>
-              ) : (null)
-            }
-            <p>Sign Up</p>
-            <input
-              type="email"
-              placeholder="Email"
-              value={signUpEmail}
-              onChange={this.onTextboxChangeSignUpEmail}
-            /><br />
-            <input
-              type="password"
-              placeholder="Password"
-              value={signUpPassword}
-              onChange={this.onTextboxChangeSignUpPassword}
-            /><br />
-            <button onClick={this.onSignUp}>Sign Up</button>
+            <button>Login</button>
           </div>
        </div>
       );
