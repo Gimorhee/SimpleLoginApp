@@ -26,9 +26,29 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      isLoading: false
-    });
+    const obj = getFromStorage('the_main_app');
+    if (obj && obj.token) {
+      const { token } = obj;
+      // Verify token
+      fetch('/api/account/verify?token=' + token)
+        .then(res => res.json())
+        .then(json => {
+          if (json.success) {
+            this.setState({
+              token,
+              isLoading: false
+            });
+          } else {
+            this.setState({
+              isLoading: false,
+            });
+          }
+        });
+    } else {
+      this.setState({
+        isLoading: false,
+      });
+    }
   }
 
   onTextboxChangeSignInEmail(event) {
