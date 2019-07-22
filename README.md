@@ -21,7 +21,7 @@ npm install
 - cd into `MERN-boilerplate`
 - Run `npm install`
 - Create `config.js` file inside config folder
-- Inside `config.js copy and paste 
+- Inside `config.js` copy and paste 
 ```
 module.exports = {
     db: 'mongodb://username:password@url:port/db',
